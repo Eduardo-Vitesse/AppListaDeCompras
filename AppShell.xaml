@@ -4,20 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AppListaDeCompras.Views"
-    Shell.FlyoutBehavior="Disabled"
-    Title="AppListaDeCompras">
+    Title="AppListaDeCompras"
+    Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
         <ShellContent
             Title="Listas"
-            Icon="icon_lista.png"
             ContentTemplate="{DataTemplate local:ListToBuyPage}"
+            Icon="icon_lista.png"
             Route="ListToBuy" />
-    
+
         <ShellContent
             Title="Perfil"
-            Icon="icon_perfil"
             ContentTemplate="{DataTemplate local:ProfilePage}"
+            Icon="icon_perfil"
             Route="Profile" />
     </TabBar>
 

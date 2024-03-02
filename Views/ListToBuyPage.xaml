@@ -1,12 +1,70 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppListaDeCompras.Views.ListToBuyPage"
-             Title="ListToBuyPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="AppListaDeCompras.Views.ListToBuyPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels"
+    Title="ListToBuyPage">
+    <ContentPage.BindingContext>
+        <vm:ListToBuyViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="75, *">
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <ImageButton HeightRequest="37" Source="back.png" />
+            <Entry
+                Margin="16,0,0,0"
+                HorizontalOptions="FillAndExpand"
+                Placeholder="Pesquisar" />
+        </StackLayout>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ListToBuy}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="70, *, 90" RowDefinitions="Auto, 30">
+                        <Image
+                            Grid.Column="0"
+                            Margin="12,0,0,0"
+                            Source="my_list.png" />
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Margin="12,0,0,0"
+                            VerticalOptions="Center">
+                            <Label Text="{Binding Name}" Style="{StaticResource Paragraph}" />
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Products.Count}" Style="{StaticResource SmallText}" />
+                                <Label Text=" items - " Style="{StaticResource SmallText}" />
+                                <Label Text="{Binding Users.Count}" Style="{StaticResource SmallTextEmphasis}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        <Label
+                            Grid.Column="2"
+                            Text="R$ 123,90"
+                            VerticalOptions="Center" />
+                        <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="3">
+                            <Button
+                                ImageSource="share.png"
+                                Style="{StaticResource ButtonBorderLess}"
+                                Text="Compartilhar" />
+                            <Button
+                                ImageSource="delete.png"
+                                Style="{StaticResource ButtonBorderLess}"
+                                Text="Excluir" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label
+                    HorizontalOptions="Center"
+                    Style="{StaticResource Paragraph}"
+                    Text="Nenhuma lista de compras"
+                    VerticalOptions="Center" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+        <Button
+            Grid.Row="1"
+            Margin="24"
+            HorizontalOptions="End"
+            Text="+"
+            VerticalOptions="End" />
+    </Grid>
 </ContentPage>
